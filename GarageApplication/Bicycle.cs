@@ -4,12 +4,24 @@ using System.Text;
 
 namespace GarageApplication
 {
+    /// <summary>
+    /// Class Bicycle inherits from class Vehicle and contains 2 public propertys with private setters.
+    /// </summary>
     public class Bicycle : Vehicle
     {
         public int AmountGears { get; private set; }
         public bool IsBMXbike { get; private set; }
-        public Bicycle(string _registrationNumber, string _color, int _wheelsAmount, int _amountGears, bool _isBMXbike)
+        /// <summary>
+        /// Constructor that takes 5 arguments to assign value to class and inherited propertys.
+        /// </summary>
+        /// <param name="_registrationNumber"></param>
+        /// <param name="_color"></param>
+        /// <param name="_wheelsAmount"></param>
+        /// <param name="_amountGears"></param>
+        /// <param name="_isBMXbike"></param>
+        public Bicycle(string _manufacturer, string _registrationNumber, string _color, int _wheelsAmount, int _amountGears, bool _isBMXbike)
         {
+            Manufacturer = _manufacturer;
             RegistrationNumber = _registrationNumber;
             Color = _color;
             WheelsAmount = _wheelsAmount;
@@ -20,7 +32,7 @@ namespace GarageApplication
         {
             return base.ToString() +
                 string.Format($"Amount of gears: { AmountGears }\n" +
-                $"Is a BMX bike: { IsBMXbike }");
+                $"Is a BMX bike: { IsBMXbike }\n");
         }
     }
 }

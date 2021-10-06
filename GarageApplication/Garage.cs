@@ -24,6 +24,7 @@ namespace GarageApplication
             foreach (T item in parkedVehicles)
             {
                 Console.WriteLine($"{ item.GetType().Name }, { item.RegistrationNumber }");
+                Console.WriteLine(item);
             }
         }
         public void CountVehicleTypes()

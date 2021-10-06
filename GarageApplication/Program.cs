@@ -6,24 +6,31 @@ namespace GarageApplication
     {
         static void Main(string[] args)
         {
-            // POPULATE LIST WITH OBJECTS
+            // Create object of Garage class
             Garage<Vehicle> newGarage = new Garage<Vehicle>(15);
-            newGarage.AddVehicle(new Bus("ABC123", "Blue", 4, false, 16));
-            newGarage.AddVehicle(new Car("DEF456", "Red", 4, false, "Volvo"));
-            newGarage.AddVehicle(new Truck("ABC123", "Blue", 4, false, true));
-            newGarage.AddVehicle(new Motorcycle("ABC123", "Blue", 2, 1500, false));
 
+            // Populate list with every type of object
+            PopulateGarage(newGarage);
+
+            newGarage.ListVehicle();
             // TEST COUNT VEHICLE TYPES METHOD
-            newGarage.CountVehicleTypes();
+            //newGarage.CountVehicleTypes();
 
             // TEST SEARCH METHOD
-            Console.WriteLine("Enter search phrase!");
-            string searchPhrase = Console.ReadLine();
-            newGarage.SearchVehicle(searchPhrase);
+            //Console.WriteLine("Enter search phrase!");
+            //string searchPhrase = Console.ReadLine();
+            //newGarage.SearchVehicle(searchPhrase);
 
             //newGarage.RemoveVehicle(newGarage.SearchVehicle(searchPhrase));
 
             Console.ReadKey();
+        }
+        public static void PopulateGarage(Garage<Vehicle> garage)
+        {
+            garage.AddVehicle(new Bus("Volvo", "ABC123", "Blue", 8, false, 16));
+            garage.AddVehicle(new Car("Mercedez", "DEF456", "Red", 4, 350, true));
+            garage.AddVehicle(new Truck("Nissan", "GHI789", "Blue", 4, true, true));
+            garage.AddVehicle(new Motorcycle("Triumph", "JKL000", "Blue", 2, 1500, false));
         }
     }
 }

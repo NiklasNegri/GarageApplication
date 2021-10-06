@@ -6,21 +6,22 @@ namespace GarageApplication
 {
     public class Car : Vehicle
     {
-        public string CarManufacturer { get; private set; }
-        public bool IsRallyCar { get; private set; }
-        public Car(string _registrationNumber, string _color, int _wheelsAmount, bool _isRallyCar, string _carManufacturer)
+        public int Horsepower { get; private set; }
+        public bool IsConvertible { get; private set; }
+        public Car(string _manufacturer, string _registrationNumber, string _color, int _wheelsAmount, int _horsepower, bool _isConvertible)
         {
+            Manufacturer = _manufacturer;
             RegistrationNumber = _registrationNumber;
             Color = _color;
             WheelsAmount = _wheelsAmount;
-            IsRallyCar = _isRallyCar;
-            CarManufacturer = _carManufacturer;
+            Horsepower = _horsepower;
+            IsConvertible = _isConvertible;
         }
         public override string ToString()
         {
             return base.ToString() +
-                string.Format($"Is rally car: { IsRallyCar }\n" +
-                $"Car manufacturer: { CarManufacturer }");
+                string.Format($"{ Horsepower } horsepowers\n" +
+                $"Is convertible: { IsConvertible }\n");
         }
     }
 }

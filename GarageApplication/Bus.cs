@@ -8,8 +8,9 @@ namespace GarageApplication
     {
         public bool IsSchoolBus { get; private set; }
         public int MaxPassangerCapacity { get; private set; }
-        public Bus(string _registrationNumber, string _color, int _wheelsAmount, bool _isSchoolBus, int _maxPassengerCapacity)
+        public Bus(string _manufacturer, string _registrationNumber, string _color, int _wheelsAmount, bool _isSchoolBus, int _maxPassengerCapacity)
         {
+            Manufacturer = _manufacturer;
             RegistrationNumber = _registrationNumber;
             Color = _color;
             WheelsAmount = _wheelsAmount;
@@ -20,7 +21,7 @@ namespace GarageApplication
         {
             return base.ToString() +
                 string.Format($"Is school bus: { IsSchoolBus }\n" +
-                $"Maximum passenger capacity: { MaxPassangerCapacity }");
+                $"Maximum passenger capacity: { MaxPassangerCapacity }\n");
         }
     }
 }
