@@ -14,11 +14,6 @@ namespace GarageApplication
         /// <summary>
         /// Constructor that takes 5 arguments to assign value to class and inherited propertys.
         /// </summary>
-        /// <param name="_registrationNumber"></param>
-        /// <param name="_color"></param>
-        /// <param name="_wheelsAmount"></param>
-        /// <param name="_amountGears"></param>
-        /// <param name="_isBMXbike"></param>
         public Bicycle(string _manufacturer, string _registrationNumber, string _color, int _wheelsAmount, int _amountGears, bool _isBMXbike)
         {
             Manufacturer = _manufacturer;

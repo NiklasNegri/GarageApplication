@@ -27,6 +27,7 @@ namespace GarageApplication
         }
         public static void PopulateGarage(Garage<Vehicle> garage)
         {
+            garage.AddVehicle(new Bicycle("Monark", "BIKEREG", "Green", 2, 6, false));
             garage.AddVehicle(new Bus("Volvo", "ABC123", "Blue", 8, false, 16));
             garage.AddVehicle(new Car("Mercedez", "DEF456", "Red", 4, 350, true));
             garage.AddVehicle(new Truck("Nissan", "GHI789", "Blue", 4, true, true));
