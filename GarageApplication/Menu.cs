@@ -12,13 +12,14 @@ namespace GarageApplication
         {
             Directory.CreateDirectory(path);
         }
+        // StartMenu är första menyn där man bara väljer ifall man vill starta ett nytt garage eller ladda ett som man sparat tidigare
         public void StartMenu()
         {
             bool quitStartMenu = false;
             Console.WriteLine("Gör ett val i menyn!\n" +
                 "1. Starta nytt garage\n" +
                 "2. Ladda gammalt garage\n" +
-                "3. Stäng programmet");
+                "3. Stäng programmet\n");
             do
             {
                 int userChoice = int.Parse(Console.ReadLine());
@@ -46,6 +47,7 @@ namespace GarageApplication
                 }
             } while (!quitStartMenu);
         }
+        // GarageMenu är menyn som har med garagets funktioner att göra och körs efter StartMenu
         public void GarageMenu(Garage<Vehicle> garage)
         {
             Garage<Vehicle> thisgarage = garage;
