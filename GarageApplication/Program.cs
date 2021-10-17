@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace GarageApplication
 {
@@ -7,12 +8,12 @@ namespace GarageApplication
         static void Main(string[] args)
         {
             // Create object of Garage class
-            Garage<Vehicle> newGarage = new Garage<Vehicle>(15);
+            //Garage<Vehicle> newGarage = new Garage<Vehicle>(15);
 
             // Populate list with every type of object
-            PopulateGarage(newGarage);
-
-            newGarage.ListVehicle();
+            //PopulateGarage(newGarage);
+            //SaveLoadJson.SerializeJSON((Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\SavedGarages\\"), "testGarage", newGarage);
+            //newGarage.ListVehicle();
             // TEST COUNT VEHICLE TYPES METHOD
             //newGarage.CountVehicleTypes();
 
@@ -21,7 +22,9 @@ namespace GarageApplication
             //string searchPhrase = Console.ReadLine();
             //newGarage.SearchVehicle(searchPhrase);
 
-            //newGarage.RemoveVehicle(newGarage.SearchVehicle(searchPhrase));
+            Menu menu = new Menu();
+
+            menu.StartMenu();
 
             Console.ReadKey();
         }

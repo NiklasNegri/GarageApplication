@@ -9,10 +9,10 @@ namespace GarageApplication
     /// </summary>
     public class Vehicle
     {
-        public string Color { get; protected set; }
-        public string Manufacturer { get; protected set; }
-        public string RegistrationNumber { get; protected set; }
-        public int WheelsAmount { get; protected set; }
+        public string Color { get; set; }
+        public string Manufacturer { get; set; }
+        public string RegistrationNumber { get; set; }
+        public int WheelsAmount { get; set; }
         public override string ToString()   
         {
             return string.Format($"Vehicle type: { GetType().Name }\n" +

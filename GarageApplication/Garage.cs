@@ -10,10 +10,10 @@ namespace GarageApplication
     }
     public class Garage<T> : IEnumerable<T> where T : Vehicle
     {
-        private List<T> parkedVehicles;
+        public List<Vehicle> parkedVehicles;
         public Garage(int maxVehicleCapacity)
         {
-            parkedVehicles = new List<T>(maxVehicleCapacity);
+            parkedVehicles = new List<Vehicle>(maxVehicleCapacity);
         }
         public void AddVehicle(T item)
         {

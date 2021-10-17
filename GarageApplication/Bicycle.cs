@@ -4,13 +4,14 @@ using System.Text;
 
 namespace GarageApplication
 {
+    
     /// <summary>
     /// Class Bicycle inherits from class Vehicle and contains 2 public propertys with private setters.
     /// </summary>
     public class Bicycle : Vehicle
     {
-        public int AmountGears { get; private set; }
-        public bool IsBMXbike { get; private set; }
+        public int AmountGears { get; set; }
+        public bool IsBMXbike { get; set; }
         /// <summary>
         /// Constructor that takes 5 arguments to assign value to class and inherited propertys.
         /// </summary>

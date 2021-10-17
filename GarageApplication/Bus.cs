@@ -6,8 +6,8 @@ namespace GarageApplication
 {
     public class Bus : Vehicle
     {
-        public bool IsSchoolBus { get; private set; }
-        public int MaxPassangerCapacity { get; private set; }
+        public bool IsSchoolBus { get; set; }
+        public int MaxPassangerCapacity { get; set; }
         public Bus(string _manufacturer, string _registrationNumber, string _color, int _wheelsAmount, bool _isSchoolBus, int _maxPassengerCapacity)
         {
             Manufacturer = _manufacturer;

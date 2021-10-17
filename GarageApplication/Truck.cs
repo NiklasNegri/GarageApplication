@@ -6,8 +6,8 @@ namespace GarageApplication
 {
     public class Truck : Vehicle 
     {
-        public bool HasAllWheelDrive { get; private set; }
-        public bool IsDieselEngine { get; private set; }
+        public bool HasAllWheelDrive { get; set; }
+        public bool IsDieselEngine { get; set; }
         public Truck(string _manufacturer, string _registrationNumber, string _color, int _wheelsAmount, bool _hasAllWheelDrive, bool _isDieselEngine)
         {
             Manufacturer = _manufacturer;
