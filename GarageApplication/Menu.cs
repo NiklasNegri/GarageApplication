@@ -72,16 +72,42 @@ namespace GarageApplication
                         thisgarage.CountVehicleTypes();
                         continue;
                     case 3:
-                        // fixa sökfunktionen
+                        Console.WriteLine("Please enter search phrase, you can search for multiple phrases at once by seperating them with a space\n");
+                        string searchinput = Console.ReadLine();
+                        thisgarage.SearchVehicle(searchinput);
                         continue;
                     case 4:
-                        // fixa funktion för att skapa nya objekt av fordon och lägga til
+                        Console.WriteLine("What type of vehicle do you want to add to the garage?\n" +
+                            "1. Bicycle\n" +
+                            "2. Bus\n" +
+                            "3. Car\n" +
+                            "4. Motorcycle\n" +
+                            "5. Truck\n");
+                        int chooseVehicle = int.Parse(Console.ReadLine());
+                        switch (chooseVehicle)
+                        {
+                            case 1:
+                                thisgarage.AddVehicle(thisgarage.MakeBicycle());
+                                break;
+                            case 2:
+                                thisgarage.AddVehicle(thisgarage.MakeBus());
+                                break;
+                            case 3:
+                                thisgarage.AddVehicle(thisgarage.MakeCar());
+                                break;
+                            case 4:
+                                thisgarage.AddVehicle(thisgarage.MakeMotorcycle());
+                                break;
+                            case 5:
+                                thisgarage.AddVehicle(thisgarage.MakeTruck());
+                                break;
+                        }
                         continue;
                     case 5:
                         // kom på hur vi ska ta bort fordon
                         continue;
                     case 6:
-                        Console.WriteLine("Vad vill du döpa garaget till?\n");
+                        Console.WriteLine("Enter name of savefile for this garage\n");
                         string garageName = Console.ReadLine();
                         SaveLoadJson.SerializeJSON(path, garageName, thisgarage);
                         break;
@@ -90,16 +116,6 @@ namespace GarageApplication
                         break;
                 }
             } while (!quitApplication);
-        }
-        public void SearchMenu()
-        {
-            Console.WriteLine("Find a vehicle in the garage by adding a parameter.\n" +
-                         "1. To find with a registration number.\n" +
-                         "2. To find all with colour.\n" +
-                         "3. To find all with a specified number of wheels.\n" +
-                         "4. To find all by manufacturer.\n" +
-                         "5. To find all by vehicle type.\n" +
-                         "0. Exit the finding!\n");
         }
         public Vehicle CreateVehicleMenu()
         {
