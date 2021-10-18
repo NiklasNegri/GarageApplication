@@ -6,27 +6,28 @@ using System.Text;
 namespace GarageApplication
 {
 
-    public class Garage<T> : IEnumerable where T : Vehicle
+    public class Garage<T> where T : Vehicle
     {
         public List<T> parkedVehicles;
         public Garage(int maxVehicleCapacity)
         {
             parkedVehicles = new List<T>(maxVehicleCapacity);
         }
-        public IEnumerator GetEnumerator()
-        {
-            return parkedVehicles.GetEnumerator();
-        }
+        //public IEnumerator GetEnumerator()
+        //{
+        //    return parkedVehicles.GetEnumerator();
+        //}
         public void AddVehicle(T item)
         {
             parkedVehicles.Add(item);
         }
         public void ListVehicle()
         {
+            int count = 1;
             foreach (T item in parkedVehicles)
             {
-                Console.WriteLine($"{ item.GetType().Name }, { item.RegistrationNumber }");
-                Console.WriteLine(item);
+                Console.WriteLine($"{ count }. { item }\n");
+                count++;
             }
         }
         public void CountVehicleTypes()

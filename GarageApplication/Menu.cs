@@ -104,7 +104,7 @@ namespace GarageApplication
                         }
                         continue;
                     case 5:
-                        // kom på hur vi ska ta bort fordon
+                        Program.PopulateGarage(thisgarage);
                         continue;
                     case 6:
                         Console.WriteLine("Enter name of savefile for this garage\n");
