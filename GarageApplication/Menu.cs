@@ -7,6 +7,7 @@ namespace GarageApplication
 {
     public class Menu
     {
+        //Hej
         public string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\SavedGarages\\";
         public Menu()
         {
