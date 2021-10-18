@@ -16,26 +16,26 @@ namespace GarageApplication
         public void StartMenu()
         {
             bool quitStartMenu = false;
-            Console.WriteLine("Gör ett val i menyn!\n" +
-                "1. Starta nytt garage\n" +
-                "2. Ladda gammalt garage\n" +
-                "3. Stäng programmet\n");
+            Console.WriteLine("Welcome to garage simulator!\n" +
+                "1. Create new garage\n" +
+                "2. Load saved garage\n" +
+                "3. Exit application\n");
             do
             {
                 int userChoice = int.Parse(Console.ReadLine());
                 switch (userChoice)
                 {
                     case 1:
-                        Console.WriteLine("Hur många platser finns i garaget?\n");
+                        Console.WriteLine("How many vehicles can be parked in the garage?\n");
                         int garageSpace = int.Parse(Console.ReadLine());
                         Garage<Vehicle> newGarage = new Garage<Vehicle>(garageSpace);
                         GarageMenu(newGarage);
                         quitStartMenu = true;
                         break;
                     case 2:
-                        Console.WriteLine("Dessa garage finns sparade:\n");
+                        Console.WriteLine("Previously saved garages:\n");
                         SaveLoadJson.FindAllSavedFiles(path);
-                        Console.WriteLine("Vilket vill du ladda?\n");
+                        Console.WriteLine("Which one do you want to load?\n");
                         string userInput = Console.ReadLine();
                         var garage = SaveLoadJson.LoadJSON(path, userInput);
                         GarageMenu(garage);
@@ -54,11 +54,14 @@ namespace GarageApplication
             bool quitApplication = false;
             do
             {
-                Console.WriteLine("Gör ett val i menyn!\n" +
+                Console.WriteLine("You have entered your garage, what now?\n" +
                     "1. Print all vehicles in garage\n" +              
-                    "2. Save garage\n" + 
-                    "3. Quit\n" + 
-                    "4. Add a vehicle to garage\n");
+                    "2. Print all types of vehicles in garage\n" + 
+                    "3. Search for a vehicle\n" + 
+                    "4. Add a vehicle to garage\n" +
+                    "5. (populate) Remove a vehicle from garage\n" +
+                    "6. Save garage\n" +
+                    "7. Exit application\n");
                 int userChoice = int.Parse(Console.ReadLine());
                 switch (userChoice)
                 {
@@ -66,18 +69,42 @@ namespace GarageApplication
                         thisgarage.ListVehicle();
                         continue;
                     case 2:
+                        thisgarage.CountVehicleTypes();
+                        continue;
+                    case 3:
+                        // fixa sökfunktionen
+                        continue;
+                    case 4:
+                        // fixa funktion för att skapa nya objekt av fordon och lägga til
+                        continue;
+                    case 5:
+                        // kom på hur vi ska ta bort fordon
+                        continue;
+                    case 6:
                         Console.WriteLine("Vad vill du döpa garaget till?\n");
                         string garageName = Console.ReadLine();
                         SaveLoadJson.SerializeJSON(path, garageName, thisgarage);
                         break;
-                    case 3:
+                    case 7:
                         quitApplication = true;
                         break;
-                    case 4:
-                        thisgarage.AddVehicle(new Car("Volvo", "123456", "Blue", 4, 450, false));
-                        continue;
                 }
             } while (!quitApplication);
+        }
+        public void SearchMenu()
+        {
+            Console.WriteLine("Find a vehicle in the garage by adding a parameter.\n" +
+                         "1. To find with a registration number.\n" +
+                         "2. To find all with colour.\n" +
+                         "3. To find all with a specified number of wheels.\n" +
+                         "4. To find all by manufacturer.\n" +
+                         "5. To find all by vehicle type.\n" +
+                         "0. Exit the finding!\n");
+        }
+        public Vehicle CreateVehicleMenu()
+        {
+            Vehicle returnVehicle = null;
+            return returnVehicle;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,15 +7,19 @@ namespace GarageApplication
 {
     public interface IEnumerable<T>
     {
-        public void ListVehicle();
+
     }
     public class Garage<T> : IEnumerable<T> where T : Vehicle
     {
-        public List<Vehicle> parkedVehicles;
+        public List<T> parkedVehicles;
         public Garage(int maxVehicleCapacity)
         {
-            parkedVehicles = new List<Vehicle>(maxVehicleCapacity);
+            parkedVehicles = new List<T>(maxVehicleCapacity);
         }
+        //public IEnumerator GetEnumerator()
+        //{
+        //    return GetEnumerator();
+        //}
         public void AddVehicle(T item)
         {
             parkedVehicles.Add(item);
