@@ -110,7 +110,7 @@ namespace GarageApplication
                     case 6:
                         Console.WriteLine("Enter name of savefile for this garage\n");
                         string garageName = Console.ReadLine();
-                        //SaveLoadJson.SerializeJSON(path, garageName, thisgarage);
+                        SaveLoadJson.SerializeJSON(path, garageName, thisgarage);
                         break;
                     case 7:
                         Console.WriteLine("Enter savefile name for this list\n");
