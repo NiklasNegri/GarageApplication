@@ -60,9 +60,9 @@ namespace GarageApplication
                     "2. Print all types of vehicles in garage\n" + 
                     "3. Search for a vehicle\n" + 
                     "4. Add a vehicle to garage\n" +
-                    "5. (populate) Remove a vehicle from garage\n" +
-                    "6. Save garage\n" +
-                    "7. Save garage list\n" +
+                    "5. Remove a vehicle from garage\n" +
+                    "6. Save garage list\n" +
+                    "7. Populate (test)\n" +
                     "8. Exit application\n");
                 int userChoice = int.Parse(Console.ReadLine());
                 switch (userChoice)
@@ -106,18 +106,20 @@ namespace GarageApplication
                         }
                         continue;
                     case 5:
-                        Program.PopulateGarage(thisgarage);
+                        thisgarage.ListVehicle();
+                        Console.WriteLine("What item would you like to remove? Enter a number:");
+                        int listIndex = int.Parse(Console.ReadLine());
+                        listIndex = listIndex - 1;
+                        thisgarage.RemoveVehicle(listIndex);
                         continue;
                     case 6:
-                        Console.WriteLine("Enter name of savefile for this garage\n");
-                        string garageName = Console.ReadLine();
-                        //SaveLoadJson.SerializeJSON(path, garageName, thisgarage);
-                        break;
-                    case 7:
                         Console.WriteLine("Enter savefile name for this list\n");
                         string listName = Console.ReadLine();
                         SaveLoadJson.SerializeJSONList(path, listName, thisgarage.ParkedVehicles);
                         break;
+                    case 7:
+                        Program.PopulateGarage(thisgarage);
+                        continue;
                     case 8:
                         quitApplication = true;
                         break;

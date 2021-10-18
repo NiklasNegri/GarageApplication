@@ -113,9 +113,10 @@ namespace GarageApplication
             }
             return returnVehicle;
         }
-        public void RemoveVehicle(T item)
+        public void RemoveVehicle(int listIndex)
         {
-            ParkedVehicles.Remove(item);
+            Vehicle item = ParkedVehicles[listIndex];
+            ParkedVehicles.RemoveAt(listIndex);
             Console.WriteLine($"{ item.GetType().Name } with reg nr { item.RegistrationNumber } removed!\n");
         }
         public Bicycle MakeBicycle()
