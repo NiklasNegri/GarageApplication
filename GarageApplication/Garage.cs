@@ -6,25 +6,35 @@ using System.Text;
 namespace GarageApplication
 {
 
-    public class Garage<T> where T : Vehicle
+    public class Garage<T> : IEnumerable<T> where T : Vehicle
     {
-        public List<T> parkedVehicles;
-        public Garage(int maxVehicleCapacity)
+        public List<T> ParkedVehicles { get; set; }
+        public int Capacity { get; set; }
+        public Garage(int capacity)
         {
-            parkedVehicles = new List<T>(maxVehicleCapacity);
+            Capacity = capacity;
+            ParkedVehicles = new List<T>(Capacity);
         }
-        //public IEnumerator GetEnumerator()
-        //{
-        //    return parkedVehicles.GetEnumerator();
-        //}
+        public Garage(List<T> vehicles)
+        {
+            ParkedVehicles = vehicles;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ParkedVehicles.GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ParkedVehicles.GetEnumerator();
+        }
         public void AddVehicle(T item)
         {
-            parkedVehicles.Add(item);
+            ParkedVehicles.Add(item);
         }
         public void ListVehicle()
         {
             int count = 1;
-            foreach (T item in parkedVehicles)
+            foreach (T item in ParkedVehicles)
             {
                 Console.WriteLine($"{ count }. { item }\n");
                 count++;
@@ -33,7 +43,7 @@ namespace GarageApplication
         public void CountVehicleTypes()
         {
             int bicycleCount = 0, busCount = 0, carCount = 0, motorcycleCount = 0, truckCount = 0;
-            foreach (var item in parkedVehicles)
+            foreach (var item in ParkedVehicles)
             {
                 if (item.GetType().Name == "Bicycle")
                 {
@@ -72,7 +82,7 @@ namespace GarageApplication
             string[] keywords = searchString.Split(' ');
             foreach (var key in keywords)
             {
-                foreach (T item in parkedVehicles)
+                foreach (T item in ParkedVehicles)
                 {
                     if (item.RegistrationNumber.ToUpper() == key.ToUpper())
                     {
@@ -105,7 +115,7 @@ namespace GarageApplication
         }
         public void RemoveVehicle(T item)
         {
-            parkedVehicles.Remove(item);
+            ParkedVehicles.Remove(item);
             Console.WriteLine($"{ item.GetType().Name } with reg nr { item.RegistrationNumber } removed!\n");
         }
         public Bicycle MakeBicycle()
@@ -121,9 +131,9 @@ namespace GarageApplication
             Console.WriteLine("Amount of Gears: ");
             int vehicleGears = int.Parse(Console.ReadLine());
             Console.WriteLine("Is it a BMX (Yes/No): ");
-            string vehicleBMX = Console.ReadLine();
+            string vehicleBMX = Console.ReadLine().ToLower();
             bool vehicleIsBMX;
-            if (vehicleBMX == "Yes")
+            if (vehicleBMX == "yes")
             {
                 vehicleIsBMX = true;
             }

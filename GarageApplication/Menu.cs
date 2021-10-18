@@ -18,7 +18,7 @@ namespace GarageApplication
             bool quitStartMenu = false;
             Console.WriteLine("Welcome to garage simulator!\n" +
                 "1. Create new garage\n" +
-                "2. Load saved garage\n" +
+                "2. Load saved list\n" +
                 "3. Exit application\n");
             do
             {
@@ -36,10 +36,10 @@ namespace GarageApplication
                         Console.WriteLine("Previously saved garages:\n");
                         SaveLoadJson.FindAllSavedFiles(path);
                         Console.WriteLine("Which one do you want to load?\n");
-                        string userInput = Console.ReadLine();
-                        var garage = SaveLoadJson.LoadJSON(path, userInput);
-                        GarageMenu(garage);
-                        quitStartMenu = true;
+                        string input = Console.ReadLine();
+                        var loadList = SaveLoadJson.LoadJSONList(path, input);
+                        Garage<Vehicle> listGarage = new Garage<Vehicle>(loadList);
+                        GarageMenu(listGarage);
                         break;
                     case 3:
                         quitStartMenu = true;
@@ -61,7 +61,8 @@ namespace GarageApplication
                     "4. Add a vehicle to garage\n" +
                     "5. (populate) Remove a vehicle from garage\n" +
                     "6. Save garage\n" +
-                    "7. Exit application\n");
+                    "7. Save garage list\n" +
+                    "8. Exit application\n");
                 int userChoice = int.Parse(Console.ReadLine());
                 switch (userChoice)
                 {
@@ -112,6 +113,11 @@ namespace GarageApplication
                         SaveLoadJson.SerializeJSON(path, garageName, thisgarage);
                         break;
                     case 7:
+                        Console.WriteLine("Enter savefile name for this list\n");
+                        string listName = Console.ReadLine();
+                        SaveLoadJson.SerializeJSONList(path, listName, thisgarage.ParkedVehicles);
+                        break;
+                    case 8:
                         quitApplication = true;
                         break;
                 }

@@ -8,18 +8,18 @@ namespace GarageApplication
 {
     public static class SaveLoadJson
     {
-        // SerializeJSON sparar Garage objektet till JSON fil
-        public static void SerializeJSON(string path, string filename, Garage<Vehicle> garage)
+        public static void SerializeJSONList(string path, string filename, List<Vehicle> vehicles)
         {
-            string jsonString = JsonConvert.SerializeObject(garage);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            string jsonString = JsonConvert.SerializeObject(vehicles, settings);
             File.WriteAllText(path + filename + ".json", jsonString);
         }
-        // laddar ett Garage från JSON fil
-        public static Garage<Vehicle> LoadJSON(string path, string filename)
+        public static List<Vehicle> LoadJSONList(string path, string filename)
         {
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
             string jsonText = File.ReadAllText(path + filename);
-            Garage<Vehicle> loadGarage = JsonConvert.DeserializeObject<Garage<Vehicle>>(jsonText);
-            return loadGarage;
+            List<Vehicle> loadedList = JsonConvert.DeserializeObject<List<Vehicle>>(jsonText, settings);
+            return loadedList;
         }
         // spottar ut alla sparade garage som finns i foldern SavedGarages där progremmet körs ifrån
         public static void FindAllSavedFiles(string path)
