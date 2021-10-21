@@ -7,6 +7,7 @@ namespace GarageApplication
     {
         static void Main(string[] args)
         {
+            //save me
             Menu menu = new Menu();
             menu.StartMenu();
         }
