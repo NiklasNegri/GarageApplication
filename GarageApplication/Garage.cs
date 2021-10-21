@@ -5,7 +5,11 @@ using System.Text;
 
 namespace GarageApplication
 {
-
+    /// <summary>
+    /// Class Garage contains the list with Vehicles which is the main function of the program,
+    /// as well as containing methods for adding, removing, searching and listing the vehicles in the garage.
+    /// Every method and property is appropriately named and describing their function and wont be commented further.
+    /// </summary>
     public class Garage<T> : IEnumerable<T> where T : Vehicle
     {
         public List<T> ParkedVehicles { get; set; }
@@ -33,106 +37,136 @@ namespace GarageApplication
         }
         public void ListVehicle()
         {
-            int count = 1;
-            foreach (T item in ParkedVehicles)
+            if (ParkedVehicles.Count == 0)
             {
-                Console.WriteLine($"{ count }. { item }\n");
-                count++;
+                Console.WriteLine("There are no parked vehicles in the garage!\n");
             }
+            else
+            {
+                int count = 1;
+                foreach (T item in ParkedVehicles)
+                {
+                    Console.WriteLine($"{ count }. \n{ item }\n");
+                    count++;
+                }
+            }          
         }
         public void CountVehicleTypes()
         {
-            int bicycleCount = 0, busCount = 0, carCount = 0, motorcycleCount = 0, truckCount = 0;
-            foreach (var item in ParkedVehicles)
+            if (ParkedVehicles.Count == 0)
             {
-                if (item.GetType().Name == "Bicycle")
-                {
-                    bicycleCount++;
-                }
-                else if (item.GetType().Name == "Bus")
-                {
-                    busCount++;
-                }
-                else if (item.GetType().Name == "Car")
-                {
-                    carCount++;
-                }
-                else if (item.GetType().Name == "Motorcycle")
-                {
-                    motorcycleCount++;
-                }
-                else if (item.GetType().Name == "Truck")
-                {
-                    truckCount++;
-                }
+                Console.WriteLine("There are no parked vehicles in the garage!\n");
             }
-            Console.WriteLine($"Amount of bicycles in garage: { bicycleCount }\n" +
+            else
+            {
+                int bicycleCount = 0, busCount = 0, carCount = 0, motorcycleCount = 0, truckCount = 0;
+                foreach (var item in ParkedVehicles)
+                {
+                    if (item.GetType().Name == "Bicycle")
+                    {
+                        bicycleCount++;
+                    }
+                    else if (item.GetType().Name == "Bus")
+                    {
+                        busCount++;
+                    }
+                    else if (item.GetType().Name == "Car")
+                    {
+                        carCount++;
+                    }
+                    else if (item.GetType().Name == "Motorcycle")
+                    {
+                        motorcycleCount++;
+                    }
+                    else if (item.GetType().Name == "Truck")
+                    {
+                        truckCount++;
+                    }            
+                }
+                Console.WriteLine($"\nAmount of bicycles in garage: { bicycleCount }\n" +
                 $"Amount of buses in garage: { busCount }\n" +
                 $"Amount of cars in garage: { carCount }\n" +
                 $"Amount of motorcycles in garage: { motorcycleCount }\n" +
                 $"Amount of trucks in garage: { truckCount }\n" +
-                $"Total amount of vehicles in garage: { bicycleCount + busCount + carCount + motorcycleCount + truckCount}");            
+                $"Total amount of vehicles in garage: { bicycleCount + busCount + carCount + motorcycleCount + truckCount}\n");
+            }                      
         }
-        /// <summary>
-        /// SearchVehicle finds first object with a property that matches the search phrase and returns it.
-        /// </summary>
         public Vehicle SearchVehicle(string searchString)
         {
             Vehicle returnVehicle = null;
-            string[] keywords = searchString.Split(' ');
-            foreach (var key in keywords)
+            if (ParkedVehicles.Count == 0)
             {
-                foreach (T item in ParkedVehicles)
+                Console.WriteLine("There are no parked vehicles in the garage!\n");
+            }
+            else
+            {
+                string[] keywords = searchString.Split(' ');
+                foreach (var key in keywords)
                 {
-                    if (item.RegistrationNumber.ToUpper() == key.ToUpper())
+                    foreach (T item in ParkedVehicles)
                     {
-                        Console.WriteLine($"Vehicle found!\n { item }\n");
-                        returnVehicle = item;
+                        if (item.RegistrationNumber.ToUpper() == key.ToUpper())
+                        {
+                            Console.WriteLine($"\nVehicle found!\n{ item }");
+                            returnVehicle = item;
+                        }
+                        else if (item.Color.ToUpper() == key.ToUpper())
+                        {
+                            Console.WriteLine($"\nVehicle found!\n{ item }");
+                            returnVehicle = item;
+                        }
+                        else if (item.GetType().Name.ToUpper() == key.ToUpper())
+                        {
+                            Console.WriteLine($"\nVehicle found!\n{ item }");
+                            returnVehicle = item;
+                        }
+                        else if (Convert.ToString(item.WheelsAmount) == key)
+                        {
+                            Console.WriteLine($"\nVehicle found!\n{ item }");
+                            returnVehicle = item;
+                        }
+                        else if (Convert.ToString(item.Manufacturer) == key)
+                        {
+                            Console.WriteLine($"\nVehicle found!\n{ item }");
+                            returnVehicle = item;
+                        }
                     }
-                    else if (item.Color.ToUpper() == key.ToUpper())
-                    {
-                        Console.WriteLine($"Vehicle found!\n { item }\n");
-                        returnVehicle = item;
-                    }
-                    else if (item.GetType().Name.ToUpper() == key.ToUpper())
-                    {
-                        Console.WriteLine($"Vehicle found!\n { item }\n");
-                        returnVehicle = item;
-                    }
-                    else if (Convert.ToString(item.WheelsAmount) == key)
-                    {
-                        Console.WriteLine($"Vehicle found!\n { item }\n");
-                        returnVehicle = item;
-                    }
-                    else if (Convert.ToString(item.Manufacturer) == key)
-                    {
-                        Console.WriteLine($"Vehicle found!\n { item }\n");
-                        returnVehicle = item;
-                    }
-                }
+                }              
+            }
+            if (returnVehicle == null)
+            {
+                Console.WriteLine($"\nNo vehicles with chosen search { searchString } was found!\n");
             }
             return returnVehicle;
         }
         public void RemoveVehicle(int listIndex)
         {
-            Vehicle item = ParkedVehicles[listIndex];
-            ParkedVehicles.RemoveAt(listIndex);
-            Console.WriteLine($"{ item.GetType().Name } with reg nr { item.RegistrationNumber } removed!\n");
+            if (ParkedVehicles.Count == 0)
+            {
+                Console.WriteLine("There are no parked vehicles in the garage!\n");
+            }
+            else
+            {
+                Vehicle item = ParkedVehicles[listIndex];
+                ParkedVehicles.RemoveAt(listIndex);
+                Console.WriteLine($"{ item.GetType().Name } with reg nr { item.RegistrationNumber } removed!\n");
+            }      
         }
+        UserInputHelper userInputHelper = new UserInputHelper();
         public Bicycle MakeBicycle()
         {
             Console.WriteLine("Manufacturer: ");
-            string vehicleManufacturer = Console.ReadLine();
+            string vehicleManufacturer = userInputHelper.ParseStringInput();
             Console.WriteLine("Registration Number: ");
             string vehicleRegNr = Console.ReadLine();
             Console.WriteLine("Color: ");
-            string vehicleColor = Console.ReadLine();
+            string vehicleColor = userInputHelper.ParseStringInput();
             Console.WriteLine("Amount of Wheels: ");
-            int vehicleWheels = int.Parse(Console.ReadLine());
+            int vehicleWheels = userInputHelper.ParseIntInput();
             Console.WriteLine("Amount of Gears: ");
-            int vehicleGears = int.Parse(Console.ReadLine());
+            int vehicleGears = userInputHelper.ParseIntInput();
             Console.WriteLine("Is it a BMX (Yes/No): ");
-            string vehicleBMX = Console.ReadLine().ToLower();
+            string vehicleBMX = userInputHelper.ParseStringInput().ToLower();
             bool vehicleIsBMX;
             if (vehicleBMX == "yes")
             {
@@ -142,7 +176,6 @@ namespace GarageApplication
             {
                 vehicleIsBMX = false;
             }
-
             Bicycle item = new Bicycle(vehicleManufacturer, vehicleRegNr, vehicleColor, vehicleWheels,
                     vehicleGears, vehicleIsBMX);
             return item;
@@ -150,17 +183,17 @@ namespace GarageApplication
         public Bus MakeBus()
         {
             Console.WriteLine("Manufacturer: ");
-            string vehicleManufacturer = Console.ReadLine();
+            string vehicleManufacturer = userInputHelper.ParseStringInput();
             Console.WriteLine("Registration Number: ");
             string vehicleRegNr = Console.ReadLine();
             Console.WriteLine("Color: ");
-            string vehicleColor = Console.ReadLine();
+            string vehicleColor = userInputHelper.ParseStringInput();
             Console.WriteLine("Amount of Wheels: ");
-            int vehicleWheels = int.Parse(Console.ReadLine());
+            int vehicleWheels = userInputHelper.ParseIntInput();
             Console.WriteLine("Maximum Passanger Capacity: ");
-            int vehicleMaxPasCap = int.Parse(Console.ReadLine());
+            int vehicleMaxPasCap = userInputHelper.ParseIntInput();
             Console.WriteLine("Is it a School Bus? (Yes/No): ");
-            string vehicleSchool = Console.ReadLine().ToLower();
+            string vehicleSchool = userInputHelper.ParseStringInput().ToLower();
             bool vehicleIsSchool;
             if (vehicleSchool == "yes")
             {
@@ -170,7 +203,6 @@ namespace GarageApplication
             {
                 vehicleIsSchool = false;
             }
-
             Bus item = new Bus(vehicleManufacturer, vehicleRegNr, vehicleColor, vehicleWheels,
                     vehicleIsSchool, vehicleMaxPasCap);
             return item;
@@ -178,17 +210,17 @@ namespace GarageApplication
         public Car MakeCar()
         {
             Console.WriteLine("Manufacturer: ");
-            string vehicleManufacturer = Console.ReadLine();
+            string vehicleManufacturer = userInputHelper.ParseStringInput();
             Console.WriteLine("Registration Number: ");
             string vehicleRegNr = Console.ReadLine();
             Console.WriteLine("Color: ");
-            string vehicleColor = Console.ReadLine();
+            string vehicleColor = userInputHelper.ParseStringInput();
             Console.WriteLine("Amount of Wheels: ");
-            int vehicleWheels = int.Parse(Console.ReadLine());
+            int vehicleWheels = userInputHelper.ParseIntInput();
             Console.WriteLine("Amount of Horsepower: ");
-            int vehicleHP = int.Parse(Console.ReadLine());
+            int vehicleHP = userInputHelper.ParseIntInput();
             Console.WriteLine("Is it a Convertable (Yes/No): ");
-            string vehicleConv = Console.ReadLine().ToLower();
+            string vehicleConv = userInputHelper.ParseStringInput().ToLower();
             bool vehicleIsConv;
             if (vehicleConv == "yes")
             {
@@ -198,7 +230,6 @@ namespace GarageApplication
             {
                 vehicleIsConv = false;
             }
-
             Car item = new Car(vehicleManufacturer, vehicleRegNr, vehicleColor, vehicleWheels,
                     vehicleHP, vehicleIsConv);
             return item;
@@ -206,15 +237,15 @@ namespace GarageApplication
         public Truck MakeTruck()
         {
             Console.WriteLine("Manufacturer: ");
-            string vehicleManufacturer = Console.ReadLine();
+            string vehicleManufacturer = userInputHelper.ParseStringInput();
             Console.WriteLine("Registration Number: ");
             string vehicleRegNr = Console.ReadLine();
             Console.WriteLine("Color: ");
-            string vehicleColor = Console.ReadLine();
+            string vehicleColor = userInputHelper.ParseStringInput();
             Console.WriteLine("Amount of Wheels: ");
-            int vehicleWheels = int.Parse(Console.ReadLine());
+            int vehicleWheels = userInputHelper.ParseIntInput();
             Console.WriteLine("Is it an All Wheel Drive? (Yes/No): ");
-            string vehicleAllWheelDrive = Console.ReadLine().ToLower();
+            string vehicleAllWheelDrive = userInputHelper.ParseStringInput().ToLower();
             bool vehicleIsAllWheelDrive;
             if (vehicleAllWheelDrive == "yes")
             {
@@ -225,7 +256,7 @@ namespace GarageApplication
                 vehicleIsAllWheelDrive = false;
             }
             Console.WriteLine("Does it run on Diesel? (Yes/No): ");
-            string vehicleDiesel = Console.ReadLine().ToLower();
+            string vehicleDiesel = userInputHelper.ParseStringInput().ToLower();
             bool vehicleIsDiesel;
             if (vehicleDiesel == "yes")
             {
@@ -235,7 +266,6 @@ namespace GarageApplication
             {
                 vehicleIsDiesel = false;
             }
-
             Truck item = new Truck(vehicleManufacturer, vehicleRegNr, vehicleColor, vehicleWheels,
                     vehicleIsAllWheelDrive, vehicleIsDiesel);
             return item;
@@ -243,17 +273,17 @@ namespace GarageApplication
         public Motorcycle MakeMotorcycle()
         {
             Console.WriteLine("Manufacturer: ");
-            string vehicleManufacturer = Console.ReadLine();
+            string vehicleManufacturer = userInputHelper.ParseStringInput();
             Console.WriteLine("Registration Number: ");
             string vehicleRegNr = Console.ReadLine();
             Console.WriteLine("Color: ");
-            string vehicleColor = Console.ReadLine();
+            string vehicleColor = userInputHelper.ParseStringInput();
             Console.WriteLine("Amount of Wheels: ");
-            int vehicleWheels = int.Parse(Console.ReadLine());
+            int vehicleWheels = userInputHelper.ParseIntInput();
             Console.WriteLine("Cubic Capacity: ");
-            int vehicleGears = int.Parse(Console.ReadLine());
+            int vehicleCC = userInputHelper.ParseIntInput();
             Console.WriteLine("Does it have Ape Hangers (Yes/No): ");
-            string vehicleApe = Console.ReadLine().ToLower();
+            string vehicleApe = userInputHelper.ParseStringInput().ToLower();
             bool vehicleIsApe;
             if (vehicleApe == "yes")
             {
@@ -263,9 +293,8 @@ namespace GarageApplication
             {
                 vehicleIsApe = false;
             }
-
             Motorcycle item = new Motorcycle(vehicleManufacturer, vehicleRegNr, vehicleColor, vehicleWheels,
-                    vehicleGears, vehicleIsApe);
+                    vehicleCC, vehicleIsApe);
             return item;
         }
     }

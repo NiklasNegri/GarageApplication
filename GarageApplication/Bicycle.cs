@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace GarageApplication
-{
-    
+{  
     /// <summary>
     /// Class Bicycle inherits from class Vehicle and contains 2 public propertys with private setters.
     /// </summary>
